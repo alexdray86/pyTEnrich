@@ -142,12 +142,6 @@ class Genomic_region_container(object):
         for idx in self.peak_summary.index :
             self.peak_genomic_regions[idx] = Genomic_regions(idx, self.te_summary.index)
 
-
-### Constants
-FIELD_FAM     = 6
-FIELD_SUBFAM  = 7
-FIELD_BEDNAME = 9
-
 class Analyser(object):
 ### This object contains all containers and do counting / stats of the overlaps
     def __init__(self, peak_vs_subfams, peak_vs_fams):
