@@ -48,7 +48,7 @@ class Bedtools_launcher(object):
         
     def intersect(self):
     ### Make intersection using multi-intersect bedtools
-        print("Bedtools_launcher->intersect : Intersect bed files with TE database")
+        print("Bedtools_launcher->Intersect : Intersect bed files with TE database")
         if self.in_dir is not None and self.in_file is None :
             list_beds = glob.glob("{}/*.bed".format(self.in_dir))
             self.list_names = self.get_names(list_beds)
@@ -62,7 +62,7 @@ class Bedtools_launcher(object):
             raise ValueError("in_dir or in_file options must be given")
             
     def make_bed_summary(self):
-        print("Bedtools_launcher->make_bed_summary : Make bed files summary")
+        print("Bedtools_launcher->Make_bed_summary : Make bed files summary")
         if self.in_dir is not None and self.in_file is None :
             list_beds = glob.glob("{}/*.bed".format(self.in_dir))
             self.list_names = self.get_names(list_beds)
@@ -266,7 +266,7 @@ class Analyser(object):
 
 
     def write_stats(self, out_dir):
-        print("Analyser->write_stats : Make enrichment statistics and write down results")
+        print("Analyser->Write_stats : Make enrichment statistics and write down results")
         ### Summary for each bef files :
         for bedname in self.peak_vs_subfams.peak_summary.index:
 

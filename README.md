@@ -10,33 +10,23 @@ laboratory of Virology and Genetics at the EPFL in 2019.
 _________________________________________________________________________________
 ## Download and get TEnrich ##
 
-### Two options : ###
-
-First option, using git clone 
-
-Warning : you need to have git lfs ! If you don't, you should be able to install it through `brew install git-lfs`    
+Warning : you need to have git lfs !
     
     Go to the desired folder where you want to install TEnrich and launch 
-    git clone https://github.com/alexdray86/pyTEnrich.git
-
-Second option : 
-
-    Click on the "Clone and download" (green button) above
-
-Then, Follow the instruction below to compile the executer and launch the script 
+    `git clone https://github.com/alexdray86/pyTEnrich.git`
 
 _________________________________________________________________________________
 
 #### Make a python environment #### 
-python3 -m venv pyTEnrich-env
-source pyTEnrich-env/bin/activate
-python3 -m pip install -r requirements.txt
+`python3 -m venv pyTEnrich-env`
+`source pyTEnrich-env/bin/activate`
+`python3 -m pip install -r requirements.txt`
 
 _________________________________________________________________________________
 #### How to get help ####
 Once compiled, launch the help with :
 
-python3 pyTEnrich.py -h
+`python3 pyTEnrich.py -h`
 
 _________________________________________________________________________________
 ## Execution ##
@@ -45,10 +35,9 @@ cannot be moved. To be improved in next versions.
 
 To launch the script with some input bed file, just do it like that :
 
-pyTEnrich.py [-h] [-i IN_DIR] [-o OUT_DIR]
+`pyTEnrich.py [-h] [-i IN_DIR] [-o OUT_DIR]`
 
 output directory does not need to exist beforehand. Enjoy !
-
 _________________________________________________________________________________
 ## Description ##
 
