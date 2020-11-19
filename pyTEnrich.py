@@ -66,6 +66,7 @@ class Bedtools_launcher(object):
     def reformat_intersect(self):
         ### First scenario : only one bed makes wrong format in intersect
         if len(self.list_names) == 1:
+            print("Bedtools_launcher->Reformat_intersect : only one bed, reformating intersect")
             temp_file = self.out_dir + "/tmp_reformat.bed"
             with open(temp_file, "w") as tmp_out:
                 with open(self.intersect_file, "r") as fp:
@@ -315,4 +316,4 @@ if __name__ == "__main__":
     anal_obj.write_stats(bt_obj.out_dir)
 
     ### 4) Clean up temp files ###
-    #bt_obj.clean_up_temp()
+    bt_obj.clean_up_temp()
