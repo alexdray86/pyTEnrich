@@ -52,15 +52,30 @@ class Bedtools_launcher(object):
         if self.in_dir is not None and self.in_file is None :
             list_beds = glob.glob("{}/*.bed".format(self.in_dir))
             self.list_names = self.get_names(list_beds)
-            
+
             ## Multi-intersect with bedtools 
             bedtools_cmd = "bedtools intersect -a " + TE_DB + " -b " + ' '.join(list_beds) + " " \
                                 + self.bedtools_options + " -names " + ' '.join(self.list_names) \
                                 + " > " + self.intersect_file
             sub.run(bedtools_cmd, check=True, shell=True)
+            # Reformat intersect if necessary
+            self.reformat_intersect()
         else :
             raise ValueError("in_dir or in_file options must be given")
-            
+    
+    def reformat_intersect(self):
+        ### First scenario : only one bed makes wrong format in intersect
+        if len(self.list_names) == 1:
+            temp_file = self.out_dir + "/tmp_reformat.bed"
+            with open(temp_file, "w") as tmp_out:
+                with open(self.intersect_file, "r") as fp:
+                    for line in fp:
+                        fields = line.strip().split('\t')
+                        list_out = fields[0:9] + [self.list_names[0]] + fields[9:12]
+                        tmp_out.write('\t'.join(list_out) + '\n')
+            mv_cmd = "mv {0} {1}".format(temp_file, self.intersect_file)
+            sub.run(mv_cmd, check=True, shell=True)
+
     def make_bed_summary(self):
         print("Bedtools_launcher->Make_bed_summary : Make bed files summary")
         if self.in_dir is not None and self.in_file is None :
@@ -300,4 +315,4 @@ if __name__ == "__main__":
     anal_obj.write_stats(bt_obj.out_dir)
 
     ### 4) Clean up temp files ###
-    bt_obj.clean_up_temp()
+    #bt_obj.clean_up_temp()

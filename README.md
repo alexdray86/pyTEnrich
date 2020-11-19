@@ -88,3 +88,4 @@ ________________________________________________________________________________
 
 Updates news :
 - v0.1 : November 2020, first version of python version of TEnrich
+- v0.2 : Solved bug with 1 single bed 
