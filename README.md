@@ -1,5 +1,5 @@
 _________________________________________________________________________________
-## TEnrich ##
+## pyTEnrich ##
 
             A code for to compute statistical enrichment of transposable elements
             on a group of bed files. 
@@ -52,7 +52,7 @@ ________________________________________________________________________________
 _________________________________________________________________________________
 ## TE database ##
 
-The RepeatMasker 4.0.5 (Library 20140131, http://www.repeatmasker.org/species/hg.html) was used to generate an in-house repeats list where fragmented ERVs were reassembled according to the following procedure: ERVs fragments were annotated either as fragmented internal parts (ERV-int) or LTRs (Long Terminal Repeats). We then computed the frequency distribution of each LTR/ERV–int pairs and compute their respective enrichment through a Wald test. LTR to an ERV-int were merged whener the LTR type was present in at least 2% of the pairs, with a p-val<0.001. The two elements had to be in the same orientation with distance<100bp. The name of the internal part was given to the resulting LTR/ERV-int merged element (e.g. HERVH-int). Fragmented ERV-int or fragmented LTRs from the same subfamily (same name in Repbase database), with the same orientation and closer than 100bp were also merged.
+The RepeatMasker 4.0.5 (Library 20140131, http://www.repeatmasker.org/species/hg.html) was used to generate an in-house repeats list where fragmented ERVs were reassembled according to the following procedure: ERVs fragments were annotated either as fragmented internal parts (ERV-int) or LTRs (Long Terminal Repeats). We then computed the frequency distribution of each LTR/ERV–int pairs and compute their respective enrichment through a Wald test. LTR to an ERV-int were merged whener the LTR type was present in at least 2% of the pairs, with a p-val<0.001. The two elements had to be in the same orientation with distance<100bp. The name of the internal part was given to the resulting LTR/ERV-int merged element (e.g. HERVH-int). Fragmented ERV-int or fragmented LTRs from the same subfamily (same name in Repbase database), with the same orientation and closer than 100bp were also merged (TE merging done by J. Duc at LVG lab). 
 
 _________________________________________________________________________________
 ## Working with another species than hg19 ##
