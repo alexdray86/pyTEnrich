@@ -112,6 +112,7 @@ class Bedtools_launcher(object):
         rm_cmd = "rm " + bt_obj.out_dir + "/tmp_*"
         sub.call(rm_cmd, shell = True)
 
+
 class Genomic_regions(object):
     def __init__(self, name, list_targets):
     ### name = name of the transposon group (e.g. subfam name)
@@ -273,7 +274,6 @@ class Analyser(object):
         pd_stats = pd_stats.drop(['pval.binom.peak_in_te', 'pval.binom.te_in_peak',
                                   'padj.binom.peak_in_te', 'padj.binom.te_in_peak'], axis = 1)
         return pd_stats
-
 
     def write_stats(self, out_dir):
         print("Analyser->Write_stats : Make enrichment statistics and write down results")
