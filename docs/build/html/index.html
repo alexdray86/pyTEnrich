@@ -188,7 +188,7 @@ laboratory of Virology and Genetics at the EPFL in 2019.</p>
 \[P(B &gt;= k) = \sum_{i=k}^n \binom{n}{i} p^i (1 - p)^{n - i}\]</div>
 <p>As often the number of success is on the low edge, we prefer to compute the inverse probability.</p>
 <div class="math notranslate nohighlight">
-\[P(B &lt; k) = 1 - P(B &gt;= k) = 1 - \sum_{i=0}^{k-1} \binom{n}{i} p^i (1 - p)^{n - i}\]</div>
+\[P(B &gt;= k) = 1 - P(B &lt; k) = 1 - \sum_{i=0}^{k-1} \binom{n}{i} p^i (1 - p)^{n - i}\]</div>
 <p>This probability is our p-value of having at least k success, given a probability p for the overlap, and n trials. The p-values obtained above are then adjusted with the Benjamin-Hochsberg method to correct for multiple testing.</p>
 <p><strong>Optional parameter : Genome subset</strong></p>
 <p>A genome subset can be given as an optional parameter to compute the enrichment only on a subset of the genome. For instance, we might interest ourself only on the neighborhood of transcription start sites (TSS). Therefore, a bed file containing these regions can be provided through the <strong>–genome_subset</strong> parameter.</p>
