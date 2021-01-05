@@ -15,7 +15,7 @@ laboratory of Virology and Genetics at the EPFL in 2019.
    :caption: Contents: 
    
    usage/installation.rst
-   usage/quickstart.rst
+   usage/execution.rst
    usage/otherspecies.rst
 
 
