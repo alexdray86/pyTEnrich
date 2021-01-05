@@ -10,7 +10,8 @@ Welcome to pyTEnrich's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   usage/installation.rst
+   usage/quickstart.rst
 
 Indices and tables
 ==================
