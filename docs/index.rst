@@ -47,18 +47,26 @@ Using Bedtools intersect (link to website), we compute a stringent overlap betwe
 
 For each input bed files, and enrichment is performed using a binomial test. The two possible outcome according to our model is : either TE overlap with peak (success) or no overlap (failure) with a probability p. p was calculated using genome occupancy of each TE subfam. The number of trials N corresponds to the number of peaks in input bed file. 
 
-As the binomial probability of having k successes from n trials is given by :
+The binomial probability of having k successes from n trials is given by
 
 .. math::
     P(B = k) = \binom{n}{k} p^k (1 - p)^{n - k}
 
-We can calculate the probability to have at least k successes by suming up probabilities :
+We can calculate the probability to have at least k success by suming up probabilities, from k success to n success
 
 .. math::
     P(B >= k) = \sum_{i=k}^n \binom{n}{i} p^i (1 - p)^{n - i}
 
-As often the number of success is on the low edge, we prefer to compute the inverse probability :
+As often the number of success is on the low edge, we prefer to compute the inverse probability.
 
 .. math::
-    P(B < k) = 1 - P(B >= k) = 1 - \sum_{i=0}^{k-1} \binom{n}{i} p^i (1 - p)^{n - i}
+    P(B >= k) = 1 - P(B < k) = 1 - \sum_{i=0}^{k-1} \binom{n}{i} p^i (1 - p)^{n - i}
+
+This probability is our p-value of having at least k success, given a probability p for the overlap, and n trials. The p-values obtained above are then adjusted with the Benjamin-Hochsberg method to correct for multiple testing.
+
+**Optional parameter : Genome subset**
+
+A genome subset can be given as an optional parameter to compute the enrichment only on a subset of the genome. For instance, we might interest ourself only on the neighborhood of transcription start sites (TSS). Therefore, a bed file containing these regions can be provided through the **--genome_subset** parameter.
+
+.. image:: images/fig5.jpg
 
