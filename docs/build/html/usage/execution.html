@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Working with other species &mdash; pyTEnrich 0.3 documentation</title>
+  <title>Execution &mdash; pyTEnrich 0.3 documentation</title>
   
 
   
@@ -35,7 +35,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Execution" href="execution.html" /> 
+    <link rel="next" title="Working with other species" href="otherspecies.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,8 +84,8 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="execution.html">Execution</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Working with other species</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otherspecies.html">Working with other species</a></li>
 </ul>
 
             
@@ -131,13 +132,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Working with other species</li>
+      <li>Execution</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/usage/otherspecies.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/usage/execution.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -150,31 +151,48 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="working-with-other-species">
-<h1>Working with other species<a class="headerlink" href="#working-with-other-species" title="Permalink to this headline">¶</a></h1>
-<p>Exemple for species danRer10 :</p>
-<ol class="arabic simple">
-<li><p>Download TE database from RepeatMasker</p></li>
-<li><dl class="simple">
-<dt>convert .fa.out file with utils/convert_repeatMasker.sh</dt><dd><p><code class="docutils literal notranslate"><span class="pre">utils/convert_repeatMasker.sh</span> <span class="pre">danRer10_repMask.fa.out</span> <span class="pre">&gt;</span> <span class="pre">db/danRer10_repMask406_dfam2.bed</span></code></p>
+  <div class="section" id="execution">
+<h1>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h1>
+<p><strong>How to get help</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">pyTEnrich.py</span> <span class="pre">-h</span></code></p>
+<p><strong>Run pyTEnrich</strong></p>
+<p>For now, the script needs to be launched inside its directory, the executable
+cannot be moved. To be improved in next versions.</p>
+<p>usage:
+<code class="docutils literal notranslate"><span class="pre">pyTEnrich.py</span> <span class="pre">[-h]</span> <span class="pre">[-i</span> <span class="pre">IN_DIR]</span> <span class="pre">[-o</span> <span class="pre">OUT_DIR]</span> <span class="pre">[-X</span> <span class="pre">optional</span> <span class="pre">parameters]</span></code></p>
+<p><em>Required parameters</em></p>
+<dl class="option-list">
+<dt><kbd><span class="option">-i <var>IN_DIR</var></span>, <span class="option">--in_dir <var>IN_DIR</var></span></kbd></dt>
+<dd><p>Input directory containing bed files. Only files with *.bed extension in this folder will be used</p>
+</dd>
+<dt><kbd><span class="option">-o <var>OUT_DIR</var></span>, <span class="option">--out_dir <var>OUT_DIR</var></span></kbd></dt>
+<dd><p>Output directory where to write results</p>
 </dd>
 </dl>
-</li>
-<li><dl class="simple">
-<dt>remove unwanted repeats :</dt><dd><p><code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-v</span> <span class="pre">'Low_complexity\|Satellite\|Simple_repeat\|Unknown'</span> <span class="pre">db/danRer10_repMask406_dfam2.bed</span> <span class="pre">&gt;</span> <span class="pre">db/danRer10_repMask406_dfam2_TEs.bed</span></code></p>
+<p><em>Optional parameters</em></p>
+<dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+<dt><kbd><span class="option">-s <var>SIZE_GENOME</var></span>, <span class="option">--size_genome <var>SIZE_GENOME</var></span></kbd></dt>
+<dd><p>Genome size (in bp). If a genome subset is provided, it will re-calculate genome size and erase this.</p>
+</dd>
+<dt><kbd><span class="option">-g <var>GENOME_SUBSET</var></span>, <span class="option">--genome_subset <var>GENOME_SUBSET</var></span></kbd></dt>
+<dd><p>Bed file representing a subset of the genome on which we wish to compute the enrichment.</p>
+</dd>
+<dt><kbd><span class="option">-t <var>TE_DB</var></span>, <span class="option">--te_db <var>TE_DB</var></span></kbd></dt>
+<dd><p>Transposable Element database. The subfamily/family name should agree with idx_fam/idx_sfam parameters.</p>
+</dd>
+<dt><kbd><span class="option">--idx_fam <var>IDX_FAM</var></span></kbd></dt>
+<dd><p>Field number corresponding to the column index of TE family name. By default, idx_fam = 6. WARNING : 0-based, ‘1’ means 2nd column.</p>
+</dd>
+<dt><kbd><span class="option">--idx_sfam <var>IDX_SFAM</var></span></kbd></dt>
+<dd><dl class="simple">
+<dt>Field number corresponding to the column index of TE subfamily name. By default, idx_sfam = 7. WARNING<span class="classifier">0-based, ‘1’ means 2nd</span></dt><dd><p>column.</p>
 </dd>
 </dl>
-</li>
-<li><dl class="simple">
-<dt>use utils/make_ref_TE.pl to make files needed by pyTEnrich</dt><dd><p>INDEX is the col number of the desired feature (subfam/fam)</p>
 </dd>
 </dl>
-</li>
-</ol>
-<p><em>class/families should always be in field 6 (0-based)</em>
-<code class="docutils literal notranslate"><span class="pre">utils/make_ref_TE.pl</span> <span class="pre">--file</span> <span class="pre">db/danRer10_repMask406_dfam2_TEs.bed</span> <span class="pre">--index</span> <span class="pre">6</span> <span class="pre">&gt;</span> <span class="pre">db/danRer10_Fam_ref_TE.txt</span></code></p>
-<p><em>subfam should always be in field 7 (0-based)</em>
-<code class="docutils literal notranslate"><span class="pre">utils/make_ref_TE.pl</span> <span class="pre">--file</span> <span class="pre">db/danRer10_repMask406_dfam2_TEs.bed</span> <span class="pre">--index</span> <span class="pre">7</span> <span class="pre">&gt;</span> <span class="pre">db/danRer10_Subfam_ref_TE.txt</span></code></p>
 </div>
 
 
@@ -185,8 +203,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="otherspecies.html" class="btn btn-neutral float-right" title="Working with other species" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="execution.html" class="btn btn-neutral float-left" title="Execution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
