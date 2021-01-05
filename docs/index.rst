@@ -52,12 +52,7 @@ The binomial probability of having k successes from n trials is given by
 .. math::
     P(B = k) = \binom{n}{k} p^k (1 - p)^{n - k}
 
-We can calculate the probability to have at least k success by suming up probabilities, from k success to n success
-
-.. math::
-    P(B >= k) = \sum_{i=k}^n \binom{n}{i} p^i (1 - p)^{n - i}
-
-As often the number of success is on the low edge, we prefer to compute the inverse probability.
+We can calculate the probability to have at least k success by suming up probabilities, from k success to n success. As often the number of success is on the low edge, we prefer to compute the inverse probability :
 
 .. math::
     P(B >= k) = 1 - P(B < k) = 1 - \sum_{i=0}^{k-1} \binom{n}{i} p^i (1 - p)^{n - i}

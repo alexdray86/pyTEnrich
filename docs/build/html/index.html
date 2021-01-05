@@ -183,10 +183,7 @@ laboratory of Virology and Genetics at the EPFL in 2019.</p>
 <p>The binomial probability of having k successes from n trials is given by</p>
 <div class="math notranslate nohighlight">
 \[P(B = k) = \binom{n}{k} p^k (1 - p)^{n - k}\]</div>
-<p>We can calculate the probability to have at least k success by suming up probabilities, from k success to n success</p>
-<div class="math notranslate nohighlight">
-\[P(B &gt;= k) = \sum_{i=k}^n \binom{n}{i} p^i (1 - p)^{n - i}\]</div>
-<p>As often the number of success is on the low edge, we prefer to compute the inverse probability.</p>
+<p>We can calculate the probability to have at least k success by suming up probabilities, from k success to n success. As often the number of success is on the low edge, we prefer to compute the inverse probability :</p>
 <div class="math notranslate nohighlight">
 \[P(B &gt;= k) = 1 - P(B &lt; k) = 1 - \sum_{i=0}^{k-1} \binom{n}{i} p^i (1 - p)^{n - i}\]</div>
 <p>This probability is our p-value of having at least k success, given a probability p for the overlap, and n trials. The p-values obtained above are then adjusted with the Benjamin-Hochsberg method to correct for multiple testing.</p>
