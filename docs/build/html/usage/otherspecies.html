@@ -1,0 +1,234 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Working with another species than hg19 &mdash; pyTEnrich 0.3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Quick Start" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> pyTEnrich
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Working with another species than hg19</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyTEnrich</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Working with another species than hg19</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/usage/otherspecies.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="working-with-another-species-than-hg19">
+<h1>Working with another species than hg19<a class="headerlink" href="#working-with-another-species-than-hg19" title="Permalink to this headline">¶</a></h1>
+<p>Exemple for species danRer10 :</p>
+<ul class="simple">
+<li><p>Download TE database from RepeatMasker</p></li>
+<li><dl class="simple">
+<dt>convert .fa.out file with utils/convert_repeatMasker.sh</dt><dd><p><code class="docutils literal notranslate"><span class="pre">utils/convert_repeatMasker.sh</span> <span class="pre">danRer10_repMask.fa.out</span> <span class="pre">&gt;</span> <span class="pre">db/danRer10_repMask406_dfam2.bed</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>remove unwanted repeats :</dt><dd><p><code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-v</span> <span class="pre">'Low_complexity\|Satellite\|Simple_repeat\|Unknown'</span> <span class="pre">db/danRer10_repMask406_dfam2.bed</span> <span class="pre">&gt;</span> <span class="pre">db/danRer10_repMask406_dfam2_TEs.bed</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>launch utils/make_ref_TE.pl to make files needed by TEnrich</dt><dd><p>INDEX is the col number of the desired feature (subfam/fam)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><em>subfam should always be in field 7 (0-based)</em>
+<code class="docutils literal notranslate"><span class="pre">utils/make_ref_TE.pl</span> <span class="pre">--file</span> <span class="pre">db/danRer10_repMask406_dfam2_TEs.bed</span> <span class="pre">--index</span> <span class="pre">6</span> <span class="pre">&gt;</span> <span class="pre">db/danRer10_Subfam_ref_TE.txt</span></code></p>
+<p><em>class/families should always be in field 6 (0-based)</em>
+<code class="docutils literal notranslate"><span class="pre">utils/make_ref_TE.pl</span> <span class="pre">--file</span> <span class="pre">db/danRer10_repMask406_dfam2_TEs.bed</span> <span class="pre">--index</span> <span class="pre">7</span> <span class="pre">&gt;</span> <span class="pre">db/danRer10_Fam_ref_TE.txt</span></code></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Laboratory of Virology and Genetics
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

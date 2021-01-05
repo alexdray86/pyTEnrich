@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'pyTEnrich'
-copyright = '2020, Alexandre Coudray'
+copyright = '2020, Laboratory of Virology and Genetics'
 author = 'Alexandre Coudray'
 
 # The full version, including alpha/beta/rc tags
