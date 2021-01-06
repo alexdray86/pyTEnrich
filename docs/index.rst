@@ -59,6 +59,14 @@ We can calculate the probability to have at least k success by suming up probabi
 
 This probability is our p-value of having at least k success, given a probability p for the overlap, and n trials. The p-values obtained above are then adjusted with the Benjamin-Hochsberg method to correct for multiple testing.
 
+**Enrichment analysis example on Imbeault et al. dataset**
+
+Using the abovementionned approach, TE enrichment analysis was performed for 321 ChIP-exo from `Imbeault et al. 2018 dataset <https://www.nature.com/articles/nature21683>`_.
+
+.. image:: images/fig4.jpg
+
+
+
 **Optional parameter : Genome subset**
 
 A genome subset can be given as an optional parameter to compute the enrichment only on a subset of the genome. For instance, we might interest ourself only on the neighborhood of transcription start sites (TSS). Therefore, a bed file containing these regions can be provided through the **--genome_subset** parameter.
