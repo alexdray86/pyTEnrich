@@ -9,7 +9,10 @@ Warning : you need to have git lfs ! To install it :
 
 Go to the desired folder where you want to install TEnrich and launch
 
-``git clone https://github.com/alexdray86/pyTEnrich.git``
+``git clone https://c4science.ch/diffusion/11057/pytenrich.git``
+
+.. 
+    ``git clone https://github.com/alexdray86/pyTEnrich.git``
 
 *Make a python environment*
 
