@@ -39,7 +39,7 @@ Note that TE genome occupancy are pre-computed for the provided TE database. If 
 
 **Step 2 : Intersect TE and Input bed files and count overlap**
 
-Using `Bedtools intersect <https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html>`, we compute a stringent overlap between input bed files and TE database. The observed overlap can then be compared with the expected overlap.
+Using `Bedtools intersect <https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html>`_, we compute a stringent overlap between input bed files and TE database. The observed overlap can then be compared with the expected overlap.
 
 .. image:: images/fig3.jpg
 

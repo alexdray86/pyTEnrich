@@ -176,7 +176,7 @@ laboratory of Virology and Genetics at the EPFL in 2019.</p>
 <img alt="_images/fig2.jpg" src="_images/fig2.jpg" />
 <p>Note that TE genome occupancy are pre-computed for the provided TE database. If another TE database is given, or if a genome subset is provided (explained below), it will be re-computed (takes a few minutes).</p>
 <p><strong>Step 2 : Intersect TE and Input bed files and count overlap</strong></p>
-<p>Using <cite>Bedtools intersect &lt;https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html&gt;</cite>, we compute a stringent overlap between input bed files and TE database. The observed overlap can then be compared with the expected overlap.</p>
+<p>Using <a class="reference external" href="https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html">Bedtools intersect</a>, we compute a stringent overlap between input bed files and TE database. The observed overlap can then be compared with the expected overlap.</p>
 <img alt="_images/fig3.jpg" src="_images/fig3.jpg" />
 <p><strong>Step 3 : Compute the enrichment of TE subfamily / family</strong></p>
 <p>The enrichment is performed using a binomial test. The binomial test is an exact test of the statistical significance of deviations from a theoretically expected distribution, considering two possible outcome. In our case : TE overlap with peak (success) or do not overlap (failure). The statistical hypothesis is :</p>
