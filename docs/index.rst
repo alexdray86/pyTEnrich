@@ -16,6 +16,7 @@ laboratory of Virology and Genetics at the EPFL in 2019.
    
    usage/installation.rst
    usage/execution.rst
+   usage/genome_subset.rst
    usage/otherspecies.rst
 
 Overview of the methods
@@ -67,12 +68,4 @@ This probability is our p-value of having at least k success, given a probabilit
 Using the abovementionned approach, TE enrichment analysis was performed for 321 ChIP-exo from `Imbeault et al. 2018 dataset <https://www.nature.com/articles/nature21683>`_.
 
 .. image:: images/fig4.jpg
-
-
-
-**Optional parameter : Genome subset**
-
-A genome subset can be given as an optional parameter to compute the enrichment only on a subset of the genome. For instance, we might interest ourself only on the neighborhood of transcription start sites (TSS). Therefore, a bed file containing these regions can be provided through the **--genome_subset** parameter.
-
-.. image:: images/fig5.jpg
 
