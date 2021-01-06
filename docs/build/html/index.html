@@ -167,20 +167,22 @@ laboratory of Virology and Genetics at the EPFL in 2019.</p>
 </div>
 <div class="section" id="overview-of-the-methods">
 <h1>Overview of the methods<a class="headerlink" href="#overview-of-the-methods" title="Permalink to this headline">¶</a></h1>
-<p>To compute the statistical enrichment, pyTEnrich compare the overlap between input bed files and transposable elements families. pyTEnrich uses a binomial model to compare the observed overlap to the expected one, given a probability computed from the genome occupancy of TE families. The goal is to compute a fold change and a p-value for the overlap observed between each TE families and a group of input bed files.</p>
+<p>To compute the statistical enrichment, pyTEnrich compare the overlap between input bed files and transposable elements families. pyTEnrich uses a binomial model to compare the observed overlap to the expected one, given a probability computed from the genome occupancy of TE families.</p>
 <p><strong>Example</strong></p>
 <p>We consider a small genome with one gene composed of two exons, and two TE families. There is 3 ChIP-seq peaks detected :</p>
 <img alt="_images/fig1.png" src="_images/fig1.png" />
 <p><strong>Step 1 : Compute genome occupancy</strong></p>
-<p>First, pyTEnrich compute genome occupancy for TE families and input bed files.</p>
+<p>First, pyTEnrich compute genome occupancy for TE families and input bed files. Genome occupancy is defined as the total number of base pair (bp) spanned by the TE family, divided by the genome size. It is therefore a ratio of genome occupancy.</p>
 <img alt="_images/fig2.jpg" src="_images/fig2.jpg" />
 <p>Note that TE genome occupancy are pre-computed for the provided TE database. If another TE database is given, or if a genome subset is provided (explained below), it will be re-computed (takes a few minutes).</p>
 <p><strong>Step 2 : Intersect TE and Input bed files and count overlap</strong></p>
-<p>Using Bedtools intersect (link to website), we compute a stringent overlap between input bed files and TE database. The observed overlap are counted to be compared with the expectations.</p>
+<p>Using <cite>Bedtools intersect &lt;https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html&gt;</cite>, we compute a stringent overlap between input bed files and TE database. The observed overlap can then be compared with the expected overlap.</p>
 <img alt="_images/fig3.jpg" src="_images/fig3.jpg" />
 <p><strong>Step 3 : Compute the enrichment of TE subfamily / family</strong></p>
-<p>For each input bed files, and enrichment is performed using a binomial test. The two possible outcome according to our model is : either TE overlap with peak (success) or no overlap (failure) with a probability p. p was calculated using genome occupancy of each TE subfam. The number of trials N corresponds to the number of peaks in input bed file.</p>
-<p>The binomial probability of having k successes from n trials is given by</p>
+<p>The enrichment is performed using a binomial test. The binomial test is an exact test of the statistical significance of deviations from a theoretically expected distribution, considering two possible outcome. In our case : TE overlap with peak (success) or do not overlap (failure). The statistical hypothesis is :</p>
+<div class="math notranslate nohighlight">
+\[{\displaystyle H_{0}:p_{obs} =p_{exp}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_{exp}\)</span> is the ratio of genome occupancy of each TE family. <span class="math notranslate nohighlight">\(p_{exp}\)</span> is therefore the expectation based on genome occupancy, and <span class="math notranslate nohighlight">\(p_{obs}\)</span> is the observed overlap. Since the probability of having k successes from n trials is given by</p>
 <div class="math notranslate nohighlight">
 \[P(B = k) = \binom{n}{k} p^k (1 - p)^{n - k}\]</div>
 <p>We can calculate the probability to have at least k success by suming up probabilities, from k success to n success. As often the number of success is on the low edge, we prefer to compute the inverse probability :</p>

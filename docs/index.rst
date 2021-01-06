@@ -21,7 +21,7 @@ laboratory of Virology and Genetics at the EPFL in 2019.
 Overview of the methods
 =======================
 
-To compute the statistical enrichment, pyTEnrich compare the overlap between input bed files and transposable elements families. pyTEnrich uses a binomial model to compare the observed overlap to the expected one, given a probability computed from the genome occupancy of TE families. The goal is to compute a fold change and a p-value for the overlap observed between each TE families and a group of input bed files. 
+To compute the statistical enrichment, pyTEnrich compare the overlap between input bed files and transposable elements families. pyTEnrich uses a binomial model to compare the observed overlap to the expected one, given a probability computed from the genome occupancy of TE families.
 
 **Example** 
 
@@ -31,7 +31,7 @@ We consider a small genome with one gene composed of two exons, and two TE famil
 
 **Step 1 : Compute genome occupancy**
 
-First, pyTEnrich compute genome occupancy for TE families and input bed files. 
+First, pyTEnrich compute genome occupancy for TE families and input bed files. Genome occupancy is defined as the total number of base pair (bp) spanned by the TE family, divided by the genome size. It is therefore a ratio of genome occupancy. 
 
 .. image:: images/fig2.jpg
 
@@ -39,15 +39,18 @@ Note that TE genome occupancy are pre-computed for the provided TE database. If 
 
 **Step 2 : Intersect TE and Input bed files and count overlap**
 
-Using Bedtools intersect (link to website), we compute a stringent overlap between input bed files and TE database. The observed overlap are counted to be compared with the expectations.
+Using `Bedtools intersect <https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html>`, we compute a stringent overlap between input bed files and TE database. The observed overlap can then be compared with the expected overlap.
 
 .. image:: images/fig3.jpg
 
 **Step 3 : Compute the enrichment of TE subfamily / family**
 
-For each input bed files, and enrichment is performed using a binomial test. The two possible outcome according to our model is : either TE overlap with peak (success) or no overlap (failure) with a probability p. p was calculated using genome occupancy of each TE subfam. The number of trials N corresponds to the number of peaks in input bed file. 
+The enrichment is performed using a binomial test. The binomial test is an exact test of the statistical significance of deviations from a theoretically expected distribution, considering two possible outcome. In our case : TE overlap with peak (success) or do not overlap (failure). The statistical hypothesis is :
 
-The binomial probability of having k successes from n trials is given by
+.. math::
+    {\displaystyle H_{0}:p_{obs} =p_{exp}}
+
+where :math:`p_{exp}` is the ratio of genome occupancy of each TE family. :math:`p_{exp}` is therefore the expectation based on genome occupancy, and :math:`p_{obs}` is the observed overlap. Since the probability of having k successes from n trials is given by
 
 .. math::
     P(B = k) = \binom{n}{k} p^k (1 - p)^{n - k}
