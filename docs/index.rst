@@ -18,8 +18,8 @@ laboratory of Virology and Genetics at the EPFL in 2019.
    usage/execution.rst
    usage/genome_subset.rst
    usage/otherspecies.rst
-
-`source code <https://c4science.ch/diffusion/11057>`_
+    
+`source code on github <https://c4science.ch/diffusion/11057>`_
 
 Overview of the methods
 =======================

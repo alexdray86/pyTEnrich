@@ -35,6 +35,9 @@ usage:
 -t TE_DB, --te_db TE_DB
     Transposable Element database. The subfamily/family name should agree with idx_fam/idx_sfam parameters.
 
+-n N_CPU, --n_cpu N_CPU
+    Number of CPU to use for multi-processing
+
 --idx_fam IDX_FAM     
     Field number corresponding to the column index of TE family name. By default, idx_fam = 6. WARNING : 0-based, '1' means 2nd column.
 
