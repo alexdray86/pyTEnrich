@@ -3,12 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pyTEnrich's documentation!
-=====================================
-
-A code for to compute statistical enrichment of transposable elements
-on a group of bed files. Code written by Alexandre Coudray from the
-laboratory of Virology and Genetics at the EPFL in 2019.
+.. image:: images/pyTEnrich_logo_design.jpf
 
 .. toctree::
    :maxdepth: 2
