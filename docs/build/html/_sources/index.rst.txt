@@ -19,7 +19,7 @@
 Overview of the methods
 =======================
 
-To compute the statistical enrichment, pyTEnrich compare the overlap between input bed files and transposable elements families. pyTEnrich uses a binomial model to compare the observed overlap to the expected one, given a probability computed from the genome occupancy of TE families.
+**pyTEnrich** compare the overlap between input bed files and transposable elements families, using a binomial model to compare the observed overlap to the expected one. The expected overlap is derived from probabilities computed from genome occupancy of TE families on mappable regions of the genome (default), or any subset of the the genome. The expectations are then compared to the observations to highlight potential over-representation of TE families / subfamilies.
 
 **Example** 
 

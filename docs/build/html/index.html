@@ -170,7 +170,7 @@
 <p><a class="reference external" href="https://c4science.ch/diffusion/11057">source code on github</a></p>
 <div class="section" id="overview-of-the-methods">
 <h1>Overview of the methods<a class="headerlink" href="#overview-of-the-methods" title="Permalink to this headline">¶</a></h1>
-<p>To compute the statistical enrichment, pyTEnrich compare the overlap between input bed files and transposable elements families. pyTEnrich uses a binomial model to compare the observed overlap to the expected one, given a probability computed from the genome occupancy of TE families.</p>
+<p><strong>pyTEnrich</strong> compare the overlap between input bed files and transposable elements families, using a binomial model to compare the observed overlap to the expected one. The expected overlap is derived from probabilities computed from genome occupancy of TE families on mappable regions of the genome (default), or any subset of the the genome. The expectations are then compared to the observations to highlight potential over-representation of TE families / subfamilies.</p>
 <p><strong>Example</strong></p>
 <p>We consider a small genome with one gene composed of two exons, and two TE families. There is 3 ChIP-seq peaks detected :</p>
 <img alt="_images/fig1.png" src="_images/fig1.png" />
