@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('../pyTEnrich'))
 # -- Project information -----------------------------------------------------
 
 project = 'pyTEnrich'
-copyright = '2020, Laboratory of Virology and Genetics'
+copyright = 'Coudray Alexandre, Laboratory of Virology and Genetics at EPFL'
 author = 'Alexandre Coudray'
 
 # The full version, including alpha/beta/rc tags
@@ -51,6 +51,15 @@ exclude_patterns = ['build', 'Thumbs.db', '.DS_Store']
 #
 #html_theme = 'alabaster'
 html_theme = "sphinx_rtd_theme"
+
+html_theme_options = {
+    'includehidden': False,
+    'titles_only': False,
+    'navigation_depth': 2,
+    'logo_only': True
+}
+
+html_logo = 'images/logo.png'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

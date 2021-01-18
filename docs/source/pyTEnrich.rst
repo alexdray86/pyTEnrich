@@ -1,5 +1,7 @@
-pyTEnrich package
-=================
+pyTEnrich class & functions 
+===========================
+
+`pyTEnrich source code on c4science <https://c4science.ch/diffusion/11057/repository/master/>`_
 
 pyTEnrich.Analyser
 -------------------------

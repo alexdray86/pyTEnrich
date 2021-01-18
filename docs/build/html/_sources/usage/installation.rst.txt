@@ -1,13 +1,11 @@
 Installation
 ____________
 
-**Download and get TEnrich**
-
 Warning : you need to have git lfs ! To install it :
 
 ``brew install git-lfs``
 
-**Install it from source**
+**Install pyTEnrich from source**
 
 Go to the desired folder where you want to install TEnrich and launch
 
@@ -15,15 +13,15 @@ Go to the desired folder where you want to install TEnrich and launch
 
 You need to have access to LVG group on c4science.
 
-*Make a python environment**
+**Using a python environment**
 
 ``python3 -m venv pyTEnrich-env``
 
-*Activate python env* 
+activate python environment
 
 ``source pyTEnrich-env/bin/activate``
 
-*Install all dependencies in pyTEnrich-env*
+Install all dependencies in pyTEnrich-env using `requirements.txt` file
 
 ``python3 -m pip install -r requirements.txt``
 

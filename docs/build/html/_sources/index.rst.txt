@@ -6,7 +6,7 @@
 .. image:: images/pyTEnrich_logo_design.png
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents: 
    
    usage/installation.rst

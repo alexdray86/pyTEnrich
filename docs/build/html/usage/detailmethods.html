@@ -54,9 +54,12 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> pyTEnrich
+            <a href="../index.html">
           
 
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -174,22 +177,41 @@
 <p>We can calculate the probability to have at least k success by suming up probabilities, from k success to n success. As often the number of success is on the low edge, we prefer to compute the inverse probability :</p>
 <div class="math notranslate nohighlight">
 \[P(B &gt;= k) = 1 - P(B &lt; k) = 1 - \sum_{i=0}^{k-1} \binom{n}{i} p^i (1 - p)^{n - i}\]</div>
-<p>This probability is our p-value of having at least k success, given a probability p for the overlap, and n trials. The p-values obtained above are then adjusted with the Benjamin-Hochsberg method to correct for multiple testing.</p>
+<p>This probability is our p-value of having at least k success, given a probability p for the overlap, and n trials.</p>
 <p><strong>Assumptions</strong></p>
 <p>The binomial model itself comes with its associated assumptions :</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>The n trials are mutually independent. The <em>trials</em>, in the case of ChIP-seq peaks, as not really independant. Considering the large size of the genome, this assumption seems reasonable.</p></li>
-<li><p>The probability of a given outcome is the same for all n samples. We assume that the probability to touch a given TE family/subfamily is the same for each peak (or input sequence) at each trial. This probability is equal to the ratio of genome occupancy and considered as the probability to touch a TE family/subfamily if we would randomly shuffle sequences.</p></li>
-<li><p>The only source of variation is simple random and binomial. This assumptions is of course broken as ChIP-seq peaks are by nature not random. It might nevertheless be true for the expected probability if we would random shuffle sequence.</p></li>
+<li><p>The probability of a given outcome is the same for all n samples. We assume that the probability to touch a given TE family/subfamily is the same for each peak (or input sequence) at each trial.</p></li>
+<li><p>The only source of variation is simple random and binomial. This assumption should be correct for the expected overlap we compute from genome occupancy.</p></li>
 </ul>
 </div></blockquote>
+<p><strong>Adjustment of p-values</strong></p>
+<p>To correct for multiple testing, p-values obtained above are adjusted with the <a class="reference external" href="https://royalsocietypublishing.org/doi/full/10.1098/rsta.2009.0127">Benjamin-Hochsberg method</a>. The following formula define our adjusted p-value <span class="math notranslate nohighlight">\(P_{adj}(i)\)</span> for the ith ranked p-value :</p>
+<div class="math notranslate nohighlight">
+\[P_{adj}(i) = \min_{i \leq k} \Big\{ \frac{ m \cdot P(k)}{k} \Big\}.\]</div>
+<p>with <span class="math notranslate nohighlight">\(m\)</span> being the total number of test and <span class="math notranslate nohighlight">\(k\)</span> the rank of the p-value.</p>
 <p><strong>Two different comparison</strong></p>
 <p>From our perpective, there is a few additional assumptions to be taken into account :</p>
 <ul class="simple">
 <li><p>We assume that the ratio of genome occupancy corresponds to the expected probability if we would random shuffle sequences. As we are dealing with intervals and not single base pair, the probability might be biased by interval length.</p></li>
 </ul>
 <p>To be as precise as possible, <em>pyTEnrich</em> will choose one out of two different comparisons, either <em>te_in_peak</em> or <em>peak_in_te</em>.</p>
+<p><strong>peak_in_te</strong></p>
+<p>This comparison is used whenever the average size of peaks (or regions in bed files) are smaller than the TE group we wish to compare to. We use the ratio of genome occupancy of TE groups as our <span class="math notranslate nohighlight">\(p_{exp}\)</span> the number of loci in the input bed file as <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>image</p>
+<p><em>Mock example</em></p>
+<p>TE family SVA_bien is 200 base pair in average, and our input bed files has intervals of 100 base pairs in average. SVA_bien covers 2% of the genome. Therefore <span class="math notranslate nohighlight">\(p_{exp} = 0.02\)</span>. The input bed file has 1000 loci, we therefore expect <span class="math notranslate nohighlight">\(n \cdot p_{exp} \approx 20\)</span> sequence in the overlap.</p>
+<p>image</p>
+<p>Let’s say we observed 150 peaks in our input bed file overlap with SVA_bien. We calculate a p-value of 1e-38 and a fold change of 7.5 between the expected overlap (=20) and the observed overlap (=150).</p>
+<p><strong>te_in_peak</strong></p>
+<p>Here we use the reverse comparison, whenever the input regions are bigger than a TE family/subfamily average size. We use the ratio of genome occupancy of <em>input regions</em> as our <span class="math notranslate nohighlight">\(p_{exp}\)</span> the number of loci in <em>the TE group</em> as our <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>image</p>
+<p><em>Mock example</em></p>
+<p>TE family AluJoke is 100 base pair in average, and our input bed files has intervals of 1000 base pairs in average. Input region covers 0.1% of the genome. Therefore <span class="math notranslate nohighlight">\(p_{exp} = 0.001\)</span>. The family AluJoke has 100’000 loci, we therefore expect <span class="math notranslate nohighlight">\(n \cdot p_{exp} \approx 100\)</span> sequence in the overlap by chance.</p>
+<p>image</p>
+<p>Let’s say we observed 140 in the overlap. We calculate a p-value of 0.13 and a fold change of 1.4. The overlap is not significant.</p>
 </div>
 
 
@@ -206,7 +228,7 @@
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2020, Laboratory of Virology and Genetics.
+        &#169; Copyright Coudray Alexandre, Laboratory of Virology and Genetics at EPFL.
 
     </p>
   </div>
