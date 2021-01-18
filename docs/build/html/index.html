@@ -88,8 +88,12 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="usage/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage/execution.html">Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/output.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/detailmethods.html">Detailed methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage/genome_subset.html">Using a genome subset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage/otherspecies.html">Working with other species</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/analysis_ex.html">Analysis example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/pyTEnrich.html">pyTEnrich package</a></li>
 </ul>
 
             
@@ -163,14 +167,25 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="usage/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage/execution.html">Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/output.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/detailmethods.html">Detailed methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage/genome_subset.html">Using a genome subset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage/otherspecies.html">Working with other species</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/analysis_ex.html">Analysis example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/pyTEnrich.html">pyTEnrich package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/pyTEnrich.html#module-pyTEnrich.Analyser">pyTEnrich.Analyser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/pyTEnrich.html#module-pyTEnrich.Bedtools_launcher">pyTEnrich.Bedtools_launcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/pyTEnrich.html#module-pyTEnrich.Db_container">pyTEnrich.Db_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/pyTEnrich.html#module-pyTEnrich.Genomic_region_container">pyTEnrich.Genomic_region_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/pyTEnrich.html#module-pyTEnrich.Genomic_regions">pyTEnrich.Genomic_regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/pyTEnrich.html#module-pyTEnrich.funs">pyTEnrich.funs</a></li>
+</ul>
+</li>
 </ul>
 </div>
-<p><a class="reference external" href="https://c4science.ch/diffusion/11057">source code on github</a></p>
 <div class="section" id="overview-of-the-methods">
 <h1>Overview of the methods<a class="headerlink" href="#overview-of-the-methods" title="Permalink to this headline">¶</a></h1>
-<p><strong>pyTEnrich</strong> compare the overlap between input bed files and transposable elements families, using a binomial model to compare the observed overlap to the expected one. The expected overlap is derived from probabilities computed from genome occupancy of TE families on mappable regions of the genome (default), or any subset of the the genome. The expectations are then compared to the observations to highlight potential over-representation of TE families / subfamilies.</p>
+<p><strong>pyTEnrich</strong> compare the overlap between input bed files and transposable elements families, using a binomial model to compare the observed overlap to the expected one. The expected overlap is derived from genome occupancy of TE families and compared to the observed overlap to highlight potential over-representation of TE families / subfamilies.</p>
 <p><strong>Example</strong></p>
 <p>We consider a small genome with one gene composed of two exons, and two TE families. There is 3 ChIP-seq peaks detected :</p>
 <img alt="_images/fig1.png" src="_images/fig1.png" />
@@ -182,19 +197,11 @@
 <p>Using <a class="reference external" href="https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html">Bedtools intersect</a>, we compute a stringent overlap between input bed files and TE database. The observed overlap can then be compared with the expected overlap.</p>
 <img alt="_images/fig3.jpg" src="_images/fig3.jpg" />
 <p><strong>Step 3 : Compute the enrichment of TE subfamily / family</strong></p>
-<p>The enrichment is performed using a binomial test. The binomial test is an exact test of the statistical significance of deviations from a theoretically expected distribution, considering two possible outcome. In our case : TE overlap with peak (success) or do not overlap (failure). The statistical hypothesis is :</p>
-<div class="math notranslate nohighlight">
-\[{\displaystyle H_{0}:p_{obs} =p_{exp}}\]</div>
-<p>where <span class="math notranslate nohighlight">\(p_{exp}\)</span> is the ratio of genome occupancy of each TE family. <span class="math notranslate nohighlight">\(p_{exp}\)</span> is therefore the expectation based on genome occupancy, and <span class="math notranslate nohighlight">\(p_{obs}\)</span> is the observed overlap. Since the probability of having k successes from n trials is given by</p>
-<div class="math notranslate nohighlight">
-\[P(B = k) = \binom{n}{k} p^k (1 - p)^{n - k}\]</div>
-<p>We can calculate the probability to have at least k success by suming up probabilities, from k success to n success. As often the number of success is on the low edge, we prefer to compute the inverse probability :</p>
+<p>The enrichment is performed using a binomial test. The binomial test is an exact test of the statistical significance of deviations from a theoretically expected distribution, considering two possible outcome. In our case : TE overlap with peak (success) or do not overlap (failure). We can calculate the probability to have at least k success by suming up probabilities, from k success to n success:</p>
 <div class="math notranslate nohighlight">
 \[P(B &gt;= k) = 1 - P(B &lt; k) = 1 - \sum_{i=0}^{k-1} \binom{n}{i} p^i (1 - p)^{n - i}\]</div>
 <p>This probability is our p-value of having at least k success, given a probability p for the overlap, and n trials. The p-values obtained above are then adjusted with the Benjamin-Hochsberg method to correct for multiple testing.</p>
-<p><strong>Enrichment analysis example on Imbeault et al. dataset</strong></p>
-<p>Using the abovementionned approach, TE enrichment analysis was performed for 321 ChIP-exo from <a class="reference external" href="https://www.nature.com/articles/nature21683">Imbeault et al. 2018 dataset</a>.</p>
-<img alt="_images/fig4.jpg" src="_images/fig4.jpg" />
+<p><a class="reference internal" href="usage/detailmethods.html#detailmethods"><span class="std std-ref">Detailed methods</span></a></p>
 </div>
 
 

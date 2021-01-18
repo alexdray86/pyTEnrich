@@ -11,15 +11,17 @@
    
    usage/installation.rst
    usage/execution.rst
+   usage/output.rst
+   usage/detailmethods.rst
    usage/genome_subset.rst
    usage/otherspecies.rst
-    
-`source code on github <https://c4science.ch/diffusion/11057>`_
-
+   usage/analysis_ex.rst
+   source/pyTEnrich.rst
+   
 Overview of the methods
 =======================
 
-**pyTEnrich** compare the overlap between input bed files and transposable elements families, using a binomial model to compare the observed overlap to the expected one. The expected overlap is derived from probabilities computed from genome occupancy of TE families on mappable regions of the genome (default), or any subset of the the genome. The expectations are then compared to the observations to highlight potential over-representation of TE families / subfamilies.
+**pyTEnrich** compare the overlap between input bed files and transposable elements families, using a binomial model to compare the observed overlap to the expected one. The expected overlap is derived from genome occupancy of TE families and compared to the observed overlap to highlight potential over-representation of TE families / subfamilies.
 
 **Example** 
 
@@ -43,26 +45,11 @@ Using `Bedtools intersect <https://bedtools.readthedocs.io/en/latest/content/too
 
 **Step 3 : Compute the enrichment of TE subfamily / family**
 
-The enrichment is performed using a binomial test. The binomial test is an exact test of the statistical significance of deviations from a theoretically expected distribution, considering two possible outcome. In our case : TE overlap with peak (success) or do not overlap (failure). The statistical hypothesis is :
-
-.. math::
-    {\displaystyle H_{0}:p_{obs} =p_{exp}}
-
-where :math:`p_{exp}` is the ratio of genome occupancy of each TE family. :math:`p_{exp}` is therefore the expectation based on genome occupancy, and :math:`p_{obs}` is the observed overlap. Since the probability of having k successes from n trials is given by
-
-.. math::
-    P(B = k) = \binom{n}{k} p^k (1 - p)^{n - k}
-
-We can calculate the probability to have at least k success by suming up probabilities, from k success to n success. As often the number of success is on the low edge, we prefer to compute the inverse probability :
+The enrichment is performed using a binomial test. The binomial test is an exact test of the statistical significance of deviations from a theoretically expected distribution, considering two possible outcome. In our case : TE overlap with peak (success) or do not overlap (failure). We can calculate the probability to have at least k success by suming up probabilities, from k success to n success: 
 
 .. math::
     P(B >= k) = 1 - P(B < k) = 1 - \sum_{i=0}^{k-1} \binom{n}{i} p^i (1 - p)^{n - i}
 
 This probability is our p-value of having at least k success, given a probability p for the overlap, and n trials. The p-values obtained above are then adjusted with the Benjamin-Hochsberg method to correct for multiple testing.
 
-**Enrichment analysis example on Imbeault et al. dataset**
-
-Using the abovementionned approach, TE enrichment analysis was performed for 321 ChIP-exo from `Imbeault et al. 2018 dataset <https://www.nature.com/articles/nature21683>`_.
-
-.. image:: images/fig4.jpg
-
+:ref:`detailmethods`

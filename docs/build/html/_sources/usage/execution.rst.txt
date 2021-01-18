@@ -42,6 +42,5 @@ usage:
     Field number corresponding to the column index of TE family name. By default, idx_fam = 6. WARNING : 0-based, '1' means 2nd column.
 
 --idx_sfam IDX_SFAM   
-    Field number corresponding to the column index of TE subfamily name. By default, idx_sfam = 7. WARNING : 0-based, '1' means 2nd
-                        column.
+    Field number corresponding to the column index of TE subfamily name. By default, idx_sfam = 7. WARNING : 0-based, '1' means 2nd column.
 

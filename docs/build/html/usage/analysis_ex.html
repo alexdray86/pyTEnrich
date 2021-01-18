@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Execution &mdash; pyTEnrich 0.3 documentation</title>
+  <title>Analysis example &mdash; pyTEnrich 0.3 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Output" href="output.html" />
-    <link rel="prev" title="Installation" href="installation.html" /> 
+    <link rel="next" title="pyTEnrich package" href="../source/pyTEnrich.html" />
+    <link rel="prev" title="Working with other species" href="otherspecies.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,12 +88,12 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="execution.html">Execution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output.html">Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="detailmethods.html">Detailed methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="genome_subset.html">Using a genome subset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="otherspecies.html">Working with other species</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analysis_ex.html">Analysis example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Analysis example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../source/pyTEnrich.html">pyTEnrich package</a></li>
 </ul>
 
@@ -143,13 +143,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Execution</li>
+      <li>Analysis example</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/usage/execution.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/usage/analysis_ex.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -162,48 +162,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="execution">
-<h1>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h1>
-<p><strong>How to get help</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">pyTEnrich.py</span> <span class="pre">-h</span></code></p>
-<p><strong>Run pyTEnrich</strong></p>
-<p>For now, the script needs to be launched inside its directory, the executable
-cannot be moved. To be improved in next versions.</p>
-<p>usage:
-<code class="docutils literal notranslate"><span class="pre">pyTEnrich.py</span> <span class="pre">[-h]</span> <span class="pre">[-i</span> <span class="pre">IN_DIR]</span> <span class="pre">[-o</span> <span class="pre">OUT_DIR]</span> <span class="pre">[-X</span> <span class="pre">optional</span> <span class="pre">parameters]</span></code></p>
-<p><em>Required parameters</em></p>
-<dl class="option-list">
-<dt><kbd><span class="option">-i <var>IN_DIR</var></span>, <span class="option">--in_dir <var>IN_DIR</var></span></kbd></dt>
-<dd><p>Input directory containing bed files. Only files with *.bed extension in this folder will be used</p>
-</dd>
-<dt><kbd><span class="option">-o <var>OUT_DIR</var></span>, <span class="option">--out_dir <var>OUT_DIR</var></span></kbd></dt>
-<dd><p>Output directory where to write results</p>
-</dd>
-</dl>
-<p><em>Optional parameters</em></p>
-<dl class="option-list">
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-s <var>SIZE_GENOME</var></span>, <span class="option">--size_genome <var>SIZE_GENOME</var></span></kbd></dt>
-<dd><p>Genome size (in bp). If a genome subset is provided, it will re-calculate genome size and erase this.</p>
-</dd>
-<dt><kbd><span class="option">-g <var>GENOME_SUBSET</var></span>, <span class="option">--genome_subset <var>GENOME_SUBSET</var></span></kbd></dt>
-<dd><p>Bed file representing a subset of the genome on which we wish to compute the enrichment.</p>
-</dd>
-<dt><kbd><span class="option">-t <var>TE_DB</var></span>, <span class="option">--te_db <var>TE_DB</var></span></kbd></dt>
-<dd><p>Transposable Element database. The subfamily/family name should agree with idx_fam/idx_sfam parameters.</p>
-</dd>
-<dt><kbd><span class="option">-n <var>N_CPU</var></span>, <span class="option">--n_cpu <var>N_CPU</var></span></kbd></dt>
-<dd><p>Number of CPU to use for multi-processing</p>
-</dd>
-<dt><kbd><span class="option">--idx_fam <var>IDX_FAM</var></span></kbd></dt>
-<dd><p>Field number corresponding to the column index of TE family name. By default, idx_fam = 6. WARNING : 0-based, ‘1’ means 2nd column.</p>
-</dd>
-<dt><kbd><span class="option">--idx_sfam <var>IDX_SFAM</var></span></kbd></dt>
-<dd><p>Field number corresponding to the column index of TE subfamily name. By default, idx_sfam = 7. WARNING : 0-based, ‘1’ means 2nd column.</p>
-</dd>
-</dl>
+  <div class="section" id="analysis-example">
+<h1>Analysis example<a class="headerlink" href="#analysis-example" title="Permalink to this headline">¶</a></h1>
+<p><strong>Enrichment analysis example on Imbeault et al. dataset</strong></p>
+<p>Using the abovementionned approach, TE enrichment analysis was performed for 321 ChIP-exo from <a class="reference external" href="https://www.nature.com/articles/nature21683">Imbeault et al. 2018 dataset</a>.</p>
+<p>One of the typical analysis is to represent all TE subfamilies as <span class="math notranslate nohighlight">\(-log_{10}(p-value)\)</span> on a heatmap, against all input samples (bed files). Here, a heatmap showing the strongest subfamily enrichment in <a class="reference external" href="https://www.nature.com/articles/nature21683">Imbeault et al. 2018</a>.</p>
+<img alt="../_images/fig4_a.png" src="../_images/fig4_a.png" />
+<p>One of the values that <em>pyTEnrich</em> typically returns is a fold change between observed and expected (). It is interseting to observed below, if we merged results from 321 ChIP-exo samples from <a class="reference external" href="https://www.nature.com/articles/nature21683">Imbeault et al. 2018</a>., the relation between the size of the overlap (#overlap), the fold change (x-axis) and the p-values (color).</p>
+<img alt="../_images/fig4_b.png" src="../_images/fig4_b.png" />
+<p>It is usually prefered to use a threshold on the fold change on top of the p-value, to select the significant over-representations, in order to limit biases coming from sample size. Indeed large N tend to decrease p-values, which is limited by the adjustment with Benjamin-Hochsberg method but not eradicated.</p>
 </div>
 
 
@@ -212,8 +179,8 @@ cannot be moved. To be improved in next versions.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="output.html" class="btn btn-neutral float-right" title="Output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../source/pyTEnrich.html" class="btn btn-neutral float-right" title="pyTEnrich package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="otherspecies.html" class="btn btn-neutral float-left" title="Working with other species" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

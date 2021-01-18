@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyTEnrich module &mdash; pyTEnrich 0.3 documentation</title>
+  <title>pyTEnrich package &mdash; pyTEnrich 0.3 documentation</title>
   
 
   
@@ -38,7 +38,8 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Analysis example" href="../usage/analysis_ex.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,11 +85,23 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage/execution.html">Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/output.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/detailmethods.html">Detailed methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage/genome_subset.html">Using a genome subset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage/otherspecies.html">Working with other species</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/analysis_ex.html">Analysis example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pyTEnrich package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyTEnrich.Analyser">pyTEnrich.Analyser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyTEnrich.Bedtools_launcher">pyTEnrich.Bedtools_launcher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyTEnrich.Db_container">pyTEnrich.Db_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyTEnrich.Genomic_region_container">pyTEnrich.Genomic_region_container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyTEnrich.Genomic_regions">pyTEnrich.Genomic_regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pyTEnrich.funs">pyTEnrich.funs</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -137,7 +150,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>pyTEnrich module</li>
+      <li>pyTEnrich package</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -156,8 +169,344 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pytenrich-module">
-<h1>pyTEnrich module<a class="headerlink" href="#pytenrich-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="pytenrich-package">
+<h1>pyTEnrich package<a class="headerlink" href="#pytenrich-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-pyTEnrich.Analyser">
+<span id="pytenrich-analyser"></span><h2>pyTEnrich.Analyser<a class="headerlink" href="#module-pyTEnrich.Analyser" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyTEnrich.Analyser.Analyser">
+<em class="property">class </em><code class="sig-prename descclassname">pyTEnrich.Analyser.</code><code class="sig-name descname">Analyser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">peak_vs_subfams</span></em>, <em class="sig-param"><span class="n">peak_vs_fams</span></em>, <em class="sig-param"><span class="n">db_container</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Analyser.Analyser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Launch analysis, statistical enrichment on a Genomic_region_container. Adjustment of p-values are launched on each containers independently. This object contains all containers and do counting / stats of the overlaps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>peak_vs_subfams</strong> (<em>Genomic_region_container</em>) – The container object with all relevant information for the comparison peak_in_te to be done at the TE subfamily level. Contains overlap between groups, probabilities based on genome occupancy, etc…</p></li>
+<li><p><strong>peak_vs_fams</strong> (<em>Genomic_region_container</em>) – same as above, but with TE families instead of TE subfamilies.</p></li>
+<li><p><strong>db_container</strong> (<em>Db_container</em>) – contains loaded databases with associated summaries</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pyTEnrich.Analyser.Analyser.counting">
+<code class="sig-name descname">counting</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">intersect_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Analyser.Analyser.counting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Here we open and read the file after bedtools intersection, to increment our containers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>intersect_file</strong> (<em>str</em>) – path to intersection files</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Analyser.Analyser.fdr">
+<code class="sig-name descname">fdr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p_vals</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Analyser.Analyser.fdr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute adjusted p-values using Benjamin-Hochsberg procedure</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Analyser.Analyser.get_pd_stats">
+<code class="sig-name descname">get_pd_stats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">genomic_container</span></em>, <em class="sig-param"><span class="n">bedname</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Analyser.Analyser.get_pd_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function to generate stats with a binomial model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>genomic_container</strong> (<em>Genomic_region_container</em>) – containers associated with a specific grouping of TEs (e.g. TE subfamily) to be used for counting and to make stats.</p></li>
+<li><p><strong>bedname</strong> (<em>str</em>) – name of the sample (linked to input bed file) for which we compute the stats.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>object containing stats results, one line for each TE group</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd_stats (pandas.DataFrame)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Analyser.Analyser.get_significance">
+<code class="sig-name descname">get_significance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pval</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Analyser.Analyser.get_significance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw significance as stars according to input p-value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pval</strong> (<em>float</em>) – input p-value</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>string containing n.s/<em>/*</em>/<strong>*/**</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>significance (str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Analyser.Analyser.single_task">
+<code class="sig-name descname">single_task</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bedname</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Analyser.Analyser.single_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is handling all the analysis (subfam/fam) for one single bed. This is the function launche by multi-processing unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bedname</strong> (<em>str</em>) – sample name on which we compute stats for each TE grouping type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Analyser.Analyser.write_stats">
+<code class="sig-name descname">write_stats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">out_dir</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Analyser.Analyser.write_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make enrichment statistics and write down results</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyTEnrich.Bedtools_launcher">
+<span id="pytenrich-bedtools-launcher"></span><h2>pyTEnrich.Bedtools_launcher<a class="headerlink" href="#module-pyTEnrich.Bedtools_launcher" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyTEnrich.Bedtools_launcher.Bedtools_launcher">
+<em class="property">class </em><code class="sig-prename descclassname">pyTEnrich.Bedtools_launcher.</code><code class="sig-name descname">Bedtools_launcher</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bedtools_options</span></em>, <em class="sig-param"><span class="n">db_container</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Bedtools_launcher.Bedtools_launcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class handles calls to bedtools to make intersection between input bed files and TE database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bedtools_options</strong> – options used for bedtools intersection between TE and bed files</p></li>
+<li><p><strong>db_container</strong> – Db_container object with all database and input/output information</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pyTEnrich.Bedtools_launcher.Bedtools_launcher.clean_up_temp">
+<code class="sig-name descname">clean_up_temp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Bedtools_launcher.Bedtools_launcher.clean_up_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean up temp files</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Bedtools_launcher.Bedtools_launcher.intersect">
+<code class="sig-name descname">intersect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Bedtools_launcher.Bedtools_launcher.intersect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make intersection using multi-intersect bedtools</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Bedtools_launcher.Bedtools_launcher.reformat_intersect">
+<code class="sig-name descname">reformat_intersect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Bedtools_launcher.Bedtools_launcher.reformat_intersect" title="Permalink to this definition">¶</a></dt>
+<dd><p>If only one bed file is provided, reformat intersection file</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyTEnrich.Db_container">
+<span id="pytenrich-db-container"></span><h2>pyTEnrich.Db_container<a class="headerlink" href="#module-pyTEnrich.Db_container" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyTEnrich.Db_container.Db_container">
+<em class="property">class </em><code class="sig-prename descclassname">pyTEnrich.Db_container.</code><code class="sig-name descname">Db_container</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">out_dir</span></em>, <em class="sig-param"><span class="n">in_dir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">genome_subset</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">te_db</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">size_genome</span><span class="o">=</span><span class="default_value">2861328253</span></em>, <em class="sig-param"><span class="n">idx_sfam</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">idx_fam</span><span class="o">=</span><span class="default_value">6</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class load / initialize databases used for enrichment analysis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out_dir</strong> (<em>str</em>) – output directory</p></li>
+<li><p><strong>te_db</strong> (<em>str</em>) – path to transposable element database to be loaded (should be bed format)</p></li>
+<li><p><strong>genome_subset</strong> (<em>str</em>) – path to genome subset bed file</p></li>
+<li><p><strong>in_dir</strong> (<em>str</em>) – path to input directory where input bed files should be</p></li>
+<li><p><strong>size_genome</strong> (<em>int</em>) – genome size in bp - used to compute probabilities in Analyser</p></li>
+<li><p><strong>idx_sfam</strong> (<em>int</em>) – index indicating column with TE subfamily names in te_db file</p></li>
+<li><p><strong>idx_fam</strong> (<em>int</em>) – index indicating column with TE family names in te_db file</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.check_te_db">
+<code class="sig-name descname">check_te_db</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.check_te_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check is TE database exists and has good shape</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.clean_up_temp">
+<code class="sig-name descname">clean_up_temp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.clean_up_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean up temp files in output directory</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.compute_size_genome">
+<code class="sig-name descname">compute_size_genome</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.compute_size_genome" title="Permalink to this definition">¶</a></dt>
+<dd><p>Here we use the genome subset file to compute the new genome size to consider for enrichment analysis</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.get_names">
+<code class="sig-name descname">get_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_beds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.get_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return names as [str] for each bed files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>list_beds</strong> (<em>list</em>) – list containing path to input bed files</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.handle_genome_subset">
+<code class="sig-name descname">handle_genome_subset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.handle_genome_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a genome subset is provided, this function launch new TE summaries generation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.make_bed_summary">
+<code class="sig-name descname">make_bed_summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.make_bed_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a summary for input bed files (bp coverage, peak average size)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.make_peak_subset">
+<code class="sig-name descname">make_peak_subset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.make_peak_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subset multiple bed files using a genome subset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.make_single_peak_subset">
+<code class="sig-name descname">make_single_peak_subset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bed</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.make_single_peak_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do subset for a single bed file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bed</strong> – input bed file to be subseted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.make_te_subset">
+<code class="sig-name descname">make_te_subset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.make_te_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subset TE database with genome subset and make new TE genome occupancy summaries
+Rely on a predefine perl script utils/make_ref_TE.pl to compute genome occupancy</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.make_te_summary">
+<code class="sig-name descname">make_te_summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.make_te_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>make subfam / fam summaries using utils/make_ref_file.pl</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Db_container.Db_container.sort_genome_subset">
+<code class="sig-name descname">sort_genome_subset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Db_container.Db_container.sort_genome_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If not set to None, sort the genome subset with UNIX sort</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyTEnrich.Genomic_region_container">
+<span id="pytenrich-genomic-region-container"></span><h2>pyTEnrich.Genomic_region_container<a class="headerlink" href="#module-pyTEnrich.Genomic_region_container" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyTEnrich.Genomic_region_container.Genomic_region_container">
+<em class="property">class </em><code class="sig-prename descclassname">pyTEnrich.Genomic_region_container.</code><code class="sig-name descname">Genomic_region_container</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">peak_summary</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Genomic_region_container.Genomic_region_container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Contains all Genomic_regions objects and control them - e.g. contains all subfams or all fams (one container by grouping type)</p>
+<dl class="py method">
+<dt id="pyTEnrich.Genomic_region_container.Genomic_region_container.increment_peak_n_i">
+<code class="sig-name descname">increment_peak_n_i</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name1</span></em>, <em class="sig-param"><span class="n">name2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Genomic_region_container.Genomic_region_container.increment_peak_n_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one to the overlap on the bed side</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Genomic_region_container.Genomic_region_container.increment_te_n_i">
+<code class="sig-name descname">increment_te_n_i</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name1</span></em>, <em class="sig-param"><span class="n">name2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Genomic_region_container.Genomic_region_container.increment_te_n_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one to the overlap between group <em>name1</em> and group <em>name2</em></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name1</strong> – reference genomic region, it needs to be in summary</p></li>
+<li><p><strong>name2</strong> – the other region to which we intersect - usually comes from input bed files</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyTEnrich.Genomic_region_container.Genomic_region_container.load_te_summary">
+<code class="sig-name descname">load_te_summary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">summary_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Genomic_region_container.Genomic_region_container.load_te_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load TE summary information to the right Genomic_region object</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyTEnrich.Genomic_regions">
+<span id="pytenrich-genomic-regions"></span><h2>pyTEnrich.Genomic_regions<a class="headerlink" href="#module-pyTEnrich.Genomic_regions" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyTEnrich.Genomic_regions.Genomic_regions">
+<em class="property">class </em><code class="sig-prename descclassname">pyTEnrich.Genomic_regions.</code><code class="sig-name descname">Genomic_regions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">list_targets</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Genomic_regions.Genomic_regions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>For group of regions (TE family, subfamily or group of peaks from same TF), define the number of overlap, the name and the “targets”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of the transposon group (e.g. subfam name)</p></li>
+<li><p><strong>list_targets</strong> – list of targets for a given group</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>total number of element in this transposon group
+n_i: dictionnary containing number of intersection between this group and group named as hashtag
+name: this group’s name (e.g. TE family name)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>n_T</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pyTEnrich.Genomic_regions.Genomic_regions.increment_n_i">
+<code class="sig-name descname">increment_n_i</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name_bed</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.Genomic_regions.Genomic_regions.increment_n_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>add one to an intersection. Name correspond to bed file (e.g. TF name) n_i corresponds to observed intersection with bed file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name_bed</strong> – string with name associated with bed file (hashtag to use in n_i dictionnary)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyTEnrich.funs">
+<span id="pytenrich-funs"></span><h2>pyTEnrich.funs<a class="headerlink" href="#module-pyTEnrich.funs" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="pyTEnrich.funs.basen_no_ext">
+<code class="sig-prename descclassname">pyTEnrich.funs.</code><code class="sig-name descname">basen_no_ext</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">my_str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.funs.basen_no_ext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the file without directory path nor extension</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>my_str</strong> (<em>str</em>) – string to convert</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pyTEnrich.funs.create_dir">
+<code class="sig-prename descclassname">pyTEnrich.funs.</code><code class="sig-name descname">create_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.funs.create_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to create directory</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pyTEnrich.funs.logger">
+<code class="sig-prename descclassname">pyTEnrich.funs.</code><code class="sig-name descname">logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.funs.logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to print Class::Name - Comments from any classes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comment</strong> (<em>str</em>) – comment to add to the logger</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pyTEnrich.funs.test_gz_file">
+<code class="sig-prename descclassname">pyTEnrich.funs.</code><code class="sig-name descname">test_gz_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyTEnrich.funs.test_gz_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detect gzip compressed file</p>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -165,6 +514,9 @@
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../usage/analysis_ex.html" class="btn btn-neutral float-left" title="Analysis example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

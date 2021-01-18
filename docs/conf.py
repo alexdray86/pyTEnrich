@@ -11,7 +11,9 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 #sys.path.append(os.path.abspath('..'))
-
+import sys, os
+sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('../pyTEnrich'))
 # -- Project information -----------------------------------------------------
 
 project = 'pyTEnrich'
@@ -23,11 +25,15 @@ release = '0.3'
 
 
 # -- General configuration ---------------------------------------------------
+autoclass_content = 'both'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = ['sphinx.ext.napoleon']
+napoleon_google_docstring = True
+napoleon_use_param = False
+napoleon_use_ivar = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['templates']
