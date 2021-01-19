@@ -48,7 +48,13 @@ From our perpective, there is a few additional assumptions to be taken into acco
 
 - We assume that the ratio of genome occupancy corresponds to the expected probability if we would random shuffle sequences. As we are dealing with intervals and not single base pair, the probability might be biased by interval length.
 
-To be as precise as possible, *pyTEnrich* will choose one out of two different comparisons, either *te_in_peak* or *peak_in_te*. 
+**How to reduce bias**
+
+One of the possibility is to provide input bed files with 1 base-pair size (for instance, peak summits from ChIP-seq). This would force the comparison **peak_in_te** below and allow a non-biased calculation of :math:`P_{exp}`. 
+
+If it is not possible, *pyTEnrich* will choose one out of two different comparisons, depending on the average sequence size in groups that are compared. The goal being to always compare the smallest against the highest, to minimize the error we make when calculating :math:`P_{exp}`. 
+
+Also, bedtools intersect options ``-f 0.5 -F 0.5 -e`` forces the center of the smallest sequence to be inside the largest. This allows the center of sequences to behave almost as a 1 base-pair input. 
 
 **peak_in_te** 
 

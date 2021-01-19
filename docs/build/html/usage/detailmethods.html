@@ -201,7 +201,10 @@
 <ul class="simple">
 <li><p>We assume that the ratio of genome occupancy corresponds to the expected probability if we would random shuffle sequences. As we are dealing with intervals and not single base pair, the probability might be biased by interval length.</p></li>
 </ul>
-<p>To be as precise as possible, <em>pyTEnrich</em> will choose one out of two different comparisons, either <em>te_in_peak</em> or <em>peak_in_te</em>.</p>
+<p><strong>How to reduce bias</strong></p>
+<p>One of the possibility is to provide input bed files with 1 base-pair size (for instance, peak summits from ChIP-seq). This would force the comparison <strong>peak_in_te</strong> below and allow a non-biased calculation of <span class="math notranslate nohighlight">\(P_{exp}\)</span>.</p>
+<p>If it is not possible, <em>pyTEnrich</em> will choose one out of two different comparisons, depending on the average sequence size in groups that are compared. The goal being to always compare the smallest against the highest, to minimize the error we make when calculating <span class="math notranslate nohighlight">\(P_{exp}\)</span>.</p>
+<p>Also, bedtools intersect options <code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">0.5</span> <span class="pre">-F</span> <span class="pre">0.5</span> <span class="pre">-e</span></code> forces the center of the smallest sequence to be inside the largest. This allows the center of sequences to behave almost as a 1 base-pair input.</p>
 <p><strong>peak_in_te</strong></p>
 <p>This comparison is used whenever the average size of peaks (or regions in bed files) are smaller than the TE group we wish to compare to. We use the ratio of genome occupancy of TE groups as our <span class="math notranslate nohighlight">\(p_{exp}\)</span> the number of loci in the input bed file as <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <p><em>Mock example</em></p>
