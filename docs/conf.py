@@ -21,7 +21,7 @@ copyright = 'Coudray Alexandre, Laboratory of Virology and Genetics at EPFL'
 author = 'Alexandre Coudray'
 
 # The full version, including alpha/beta/rc tags
-release = '0.3'
+release = '0.6'
 
 
 # -- General configuration ---------------------------------------------------
