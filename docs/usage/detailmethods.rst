@@ -41,7 +41,8 @@ To correct for multiple testing, p-values obtained above are adjusted with the `
 
 with :math:`m` being the total number of test and :math:`k` the rank of the p-value. 
 
-**Two different comparison**
+Two possible comparisons
+*************************
 
 From our perpective, there is a few additional assumptions to be taken into account : 
 
@@ -53,13 +54,11 @@ To be as precise as possible, *pyTEnrich* will choose one out of two different c
 
 This comparison is used whenever the average size of peaks (or regions in bed files) are smaller than the TE group we wish to compare to. We use the ratio of genome occupancy of TE groups as our :math:`p_{exp}` the number of loci in the input bed file as :math:`n`.
 
-image
-
 *Mock example*
 
 TE family SVA_bien is 200 base pair in average, and our input bed files has intervals of 100 base pairs in average. SVA_bien covers 2% of the genome. Therefore :math:`p_{exp} = 0.02`. The input bed file has 1000 loci, we therefore expect :math:`n \cdot p_{exp} \approx 20` sequence in the overlap. 
 
-image 
+.. image:: ../images/big_TE_small_peak.png  
 
 Let's say we observed 150 peaks in our input bed file overlap with SVA_bien. We calculate a p-value of 1e-38 and a fold change of 7.5 between the expected overlap (=20) and the observed overlap (=150). 
 
@@ -67,13 +66,11 @@ Let's say we observed 150 peaks in our input bed file overlap with SVA_bien. We 
 
 Here we use the reverse comparison, whenever the input regions are bigger than a TE family/subfamily average size. We use the ratio of genome occupancy of *input regions* as our :math:`p_{exp}` the number of loci in *the TE group* as our :math:`n`.
 
-image
-
 *Mock example*
 
 TE family AluJoke is 100 base pair in average, and our input bed files has intervals of 1000 base pairs in average. Input region covers 0.1% of the genome. Therefore :math:`p_{exp} = 0.001`. The family AluJoke has 100'000 loci, we therefore expect :math:`n \cdot p_{exp} \approx 100` sequence in the overlap by chance.
 
-image 
+.. image:: ../images/small_TE_big_peak.png  
 
 Let's say we observed 140 in the overlap. We calculate a p-value of 0.13 and a fold change of 1.4. The overlap is not significant.
 

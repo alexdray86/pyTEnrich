@@ -93,7 +93,10 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="execution.html">Execution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output.html">Output</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Detailed methods</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Detailed methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#two-possible-comparisons">Two possible comparisons</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="genome_subset.html">Using a genome subset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="otherspecies.html">Working with other species</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis_ex.html">Analysis example</a></li>
@@ -192,7 +195,8 @@
 <div class="math notranslate nohighlight">
 \[P_{adj}(i) = \min_{i \leq k} \Big\{ \frac{ m \cdot P(k)}{k} \Big\}.\]</div>
 <p>with <span class="math notranslate nohighlight">\(m\)</span> being the total number of test and <span class="math notranslate nohighlight">\(k\)</span> the rank of the p-value.</p>
-<p><strong>Two different comparison</strong></p>
+<div class="section" id="two-possible-comparisons">
+<h2>Two possible comparisons<a class="headerlink" href="#two-possible-comparisons" title="Permalink to this headline">¶</a></h2>
 <p>From our perpective, there is a few additional assumptions to be taken into account :</p>
 <ul class="simple">
 <li><p>We assume that the ratio of genome occupancy corresponds to the expected probability if we would random shuffle sequences. As we are dealing with intervals and not single base pair, the probability might be biased by interval length.</p></li>
@@ -200,18 +204,17 @@
 <p>To be as precise as possible, <em>pyTEnrich</em> will choose one out of two different comparisons, either <em>te_in_peak</em> or <em>peak_in_te</em>.</p>
 <p><strong>peak_in_te</strong></p>
 <p>This comparison is used whenever the average size of peaks (or regions in bed files) are smaller than the TE group we wish to compare to. We use the ratio of genome occupancy of TE groups as our <span class="math notranslate nohighlight">\(p_{exp}\)</span> the number of loci in the input bed file as <span class="math notranslate nohighlight">\(n\)</span>.</p>
-<p>image</p>
 <p><em>Mock example</em></p>
 <p>TE family SVA_bien is 200 base pair in average, and our input bed files has intervals of 100 base pairs in average. SVA_bien covers 2% of the genome. Therefore <span class="math notranslate nohighlight">\(p_{exp} = 0.02\)</span>. The input bed file has 1000 loci, we therefore expect <span class="math notranslate nohighlight">\(n \cdot p_{exp} \approx 20\)</span> sequence in the overlap.</p>
-<p>image</p>
+<img alt="../_images/big_TE_small_peak.png" src="../_images/big_TE_small_peak.png" />
 <p>Let’s say we observed 150 peaks in our input bed file overlap with SVA_bien. We calculate a p-value of 1e-38 and a fold change of 7.5 between the expected overlap (=20) and the observed overlap (=150).</p>
 <p><strong>te_in_peak</strong></p>
 <p>Here we use the reverse comparison, whenever the input regions are bigger than a TE family/subfamily average size. We use the ratio of genome occupancy of <em>input regions</em> as our <span class="math notranslate nohighlight">\(p_{exp}\)</span> the number of loci in <em>the TE group</em> as our <span class="math notranslate nohighlight">\(n\)</span>.</p>
-<p>image</p>
 <p><em>Mock example</em></p>
 <p>TE family AluJoke is 100 base pair in average, and our input bed files has intervals of 1000 base pairs in average. Input region covers 0.1% of the genome. Therefore <span class="math notranslate nohighlight">\(p_{exp} = 0.001\)</span>. The family AluJoke has 100’000 loci, we therefore expect <span class="math notranslate nohighlight">\(n \cdot p_{exp} \approx 100\)</span> sequence in the overlap by chance.</p>
-<p>image</p>
+<img alt="../_images/small_TE_big_peak.png" src="../_images/small_TE_big_peak.png" />
 <p>Let’s say we observed 140 in the overlap. We calculate a p-value of 0.13 and a fold change of 1.4. The overlap is not significant.</p>
+</div>
 </div>
 
 
