@@ -9,7 +9,7 @@ Warning : you need to have git lfs ! To install it :
 
 Go to the desired folder where you want to install TEnrich and launch
 
-``git clone https://c4science.ch/diffusion/11057/pytenrich.git``
+``git clone ssh://git@c4science.ch/diffusion/11057/pytenrich.git``
 
 You need to have access to LVG group on c4science.
 
