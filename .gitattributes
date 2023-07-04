@@ -1,10 +1,2 @@
-db/SubFam_ERE.txt filter=lfs diff=lfs merge=lfs -text
-db/fam_size_quantiles.txt filter=lfs diff=lfs merge=lfs -text
-db/hg19_TE_repmask_LTRm_s_20140131.bed.gz filter=lfs diff=lfs merge=lfs -text
-db/subfam_median_size.txt filter=lfs diff=lfs merge=lfs -text
-db/Fam_ref_TE.txt filter=lfs diff=lfs merge=lfs -text
-db/Subfam_ref_TE.txt filter=lfs diff=lfs merge=lfs -text
-db/fam_median_size.txt filter=lfs diff=lfs merge=lfs -text
-db/subfam_size_quantiles.txt filter=lfs diff=lfs merge=lfs -text
-db/test_te_1000.bed filter=lfs diff=lfs merge=lfs -text
-db/Clusters_ref_TE.txt filter=lfs diff=lfs merge=lfs -text
+*.ipynb linguist-detectable=false
+*.py linguist-detectable=true
